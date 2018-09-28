@@ -67,7 +67,7 @@ The paper also includes comparisons to the position-aware attention LSTM (PA-LST
 
 ```
 @inproceedings{zhang2018graph,
- author = {Yuhao Zhang and Peng Qi and Christopher D. Manning},
+ author = {Zhang, Yuhao and Qi, Peng and Manning, Christopher D.},
  booktitle = {Empirical Methods in Natural Language Processing (EMNLP)},
  title = {Graph Convolution over Pruned Dependency Trees Improves Relation Extraction},
  url = {https://nlp.stanford.edu/pubs/zhang2018graph.pdf},
