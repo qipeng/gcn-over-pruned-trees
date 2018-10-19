@@ -17,7 +17,7 @@ from torch.autograd import Variable
 
 from data.loader import DataLoader
 from model.trainer import GCNTrainer
-from utils import scorer, constant, helper
+from utils import torch_utils, scorer, constant, helper
 from utils.vocab import Vocab
 
 parser = argparse.ArgumentParser()
@@ -65,6 +65,10 @@ parser.add_argument('--info', type=str, default='', help='Optional info for the 
 parser.add_argument('--seed', type=int, default=1234)
 parser.add_argument('--cuda', type=bool, default=torch.cuda.is_available())
 parser.add_argument('--cpu', action='store_true', help='Ignore CUDA.')
+
+parser.add_argument('--load', dest='load', action='store_true', help='Load pre-trained model.')
+parser.add_argument('--model_dir', type=str, help='Directory of the model.')
+
 args = parser.parse_args()
 
 torch.manual_seed(args.seed)
@@ -109,7 +113,16 @@ file_logger = helper.FileLogger(model_save_dir + '/' + opt['log'], header="# epo
 helper.print_config(opt)
 
 # model
-trainer = GCNTrainer(opt, emb_matrix=emb_matrix)
+if not opt['load']:
+    trainer = GCNTrainer(opt, emb_matrix=emb_matrix)
+else:
+    # load pre-train model
+    model_file = opt['model_dir'] 
+    print("Loading model from {}".format(model_file))
+    model_opt = torch_utils.load_config(model_file)
+    model_opt['optim'] = opt['optim']
+    trainer = GCNTrainer(model_opt)
+    trainer.load(model_file)   
 
 id2label = dict([(v,k) for k,v in label2id.items()])
 dev_score_history = []

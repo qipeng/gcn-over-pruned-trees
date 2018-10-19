@@ -59,6 +59,13 @@ python eval.py saved_models/00 --dataset test
 
 This will use the `best_model.pt` file by default. Use `--model checkpoint_epoch_10.pt` to specify a model checkpoint file.
 
+## Retrain
+
+Reload a pre-train model and continue to fine tune, run:
+```
+python train.py --load --model_dir saved_models/01/best_model.pt --optim sgd --lr 0.001
+```
+
 ## Related Repo
 
 The paper also includes comparisons to the position-aware attention LSTM (PA-LSTM) model for relation extraction. To reproduce the corresponding results, please refer to [this repo](https://github.com/yuhaozhang/tacred-relation).
