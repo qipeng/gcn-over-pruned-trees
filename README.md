@@ -61,9 +61,9 @@ This will use the `best_model.pt` file by default. Use `--model checkpoint_epoch
 
 ## Retrain
 
-Reload a pre-train model and continue to fine tune, run:
+Reload a pretrained model and finetune it, run:
 ```
-python train.py --load --model_dir saved_models/01/best_model.pt --optim sgd --lr 0.001
+python train.py --load --model_file saved_models/01/best_model.pt --optim sgd --lr 0.001
 ```
 
 ## Related Repo

@@ -66,8 +66,8 @@ parser.add_argument('--seed', type=int, default=1234)
 parser.add_argument('--cuda', type=bool, default=torch.cuda.is_available())
 parser.add_argument('--cpu', action='store_true', help='Ignore CUDA.')
 
-parser.add_argument('--load', dest='load', action='store_true', help='Load pre-trained model.')
-parser.add_argument('--model_dir', type=str, help='Directory of the model.')
+parser.add_argument('--load', dest='load', action='store_true', help='Load pretrained model.')
+parser.add_argument('--model_file', type=str, help='Filename of the pretrained model.')
 
 args = parser.parse_args()
 
@@ -116,8 +116,8 @@ helper.print_config(opt)
 if not opt['load']:
     trainer = GCNTrainer(opt, emb_matrix=emb_matrix)
 else:
-    # load pre-train model
-    model_file = opt['model_dir'] 
+    # load pretrained model
+    model_file = opt['model_file'] 
     print("Loading model from {}".format(model_file))
     model_opt = torch_utils.load_config(model_file)
     model_opt['optim'] = opt['optim']
